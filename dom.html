@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM</title>
+    <style>
+        .btn { background-color: orange; }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- Emmet: p#content -->
+        <p id="content">   Main Content   
+        </p>
+        <div class="notice">
+            <strong>NOTICE</strong>
+        </div>
+        <ul>
+            <li>One</li>
+            <li>Two</li>
+            <li>Three</li>
+        </ul>
+    </div>
+    <p class="notice">2nd notice</p>
+    <script>
+        // getElementById
+        let content = document.getElementById("content"); 
+        // console.log( content.innerHTML );
+        content.innerHTML += " and some extras..";
+
+        // querySelector()
+        let notice = document.querySelector(".notice"); // 1st occurence
+        // console.log( notice );
+        notice.innerText += ": " + ( 10 * 80 );
+
+        let li = document.querySelector("ul li:nth-child(2)");
+        // console.log( li );
+        li.remove(); // Remove element
+
+        let notices = document.querySelectorAll(".notice");
+        // console.log( notices, notices.length );
+        let clock = notices[1];
+        console.log( clock );
+ 
+        // setInterval( FUNCTION, MILLISECONDS );
+        function showTime(){
+            // Show current time:
+            const date = new Date();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            const seconds = date.getSeconds();
+            if( hours < 12 ) {
+                const time = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0') + ' AM';
+                clock.innerText = time;
+            }
+            else{
+                const time = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0') + ' PM';
+                clock.innerText = time;
+            }
+        }
+        setInterval( showTime, 1000 );
+        // setTimeout( FUNCTION, MILLISECONDS );
+        // Runs once after MILLISECONDS
+
+        const liEls = document.querySelectorAll("li");
+
+        liEls.forEach( handleLi );
+
+        function handleLi( currentLi, index ){
+            currentLi.setAttribute(
+                "class",
+                "btn"
+            );
+            console.log( currentLi, index );
+        }
+
+
+</script>
+</body>
+</html>
